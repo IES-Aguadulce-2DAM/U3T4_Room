@@ -12,7 +12,7 @@ public class ElementosViewModel extends AndroidViewModel {
 
     ElementosRepositorio elementosRepositorio;
 
-    MutableLiveData<List<Elemento>> listElementosMutableLiveData = new MutableLiveData<>();
+    MutableLiveData<List<Elemento>> listaElementos = new MutableLiveData<>();
 
     MutableLiveData<Elemento> elementoSeleccionado = new MutableLiveData<>();
 
@@ -21,18 +21,18 @@ public class ElementosViewModel extends AndroidViewModel {
 
         elementosRepositorio = new ElementosRepositorio();
 
-        listElementosMutableLiveData.setValue(elementosRepositorio.obtener());
+        listaElementos.setValue(elementosRepositorio.obtener());
     }
 
     MutableLiveData<List<Elemento>> obtener(){
-        return listElementosMutableLiveData;
+        return listaElementos;
     }
 
     void insertar(Elemento elemento){
         elementosRepositorio.insertar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+                listaElementos.setValue(elementos);
             }
         });
     }
@@ -41,7 +41,7 @@ public class ElementosViewModel extends AndroidViewModel {
         elementosRepositorio.eliminar(elemento, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+                listaElementos.setValue(elementos);
             }
         });
     }
@@ -50,7 +50,7 @@ public class ElementosViewModel extends AndroidViewModel {
         elementosRepositorio.actualizar(elemento, valoracion, new ElementosRepositorio.Callback() {
             @Override
             public void cuandoFinalice(List<Elemento> elementos) {
-                listElementosMutableLiveData.setValue(elementos);
+                listaElementos.setValue(elementos);
             }
         });
     }
